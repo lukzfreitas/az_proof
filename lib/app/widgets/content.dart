@@ -1,4 +1,4 @@
-import 'package:az_proof/app/widgets/card_demand.dart';
+import 'package:az_proof/app/widgets/card_dashboard.dart';
 import 'package:az_proof/app/widgets/title_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -14,19 +14,19 @@ class Content extends StatelessWidget {
       children: [
         TitleDashboard(text: "Resumo da atividade"),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,          
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CardDemand(
+            CardDashboard(
               icon: Icon(FeatherIcons.user),
               title: '200 Pedidos',
               subtitle: "R\$ 50.480,95",
             ),
-            CardDemand(
+            CardDashboard(
               icon: Icon(FeatherIcons.user),
               title: '200 Pedidos',
               subtitle: "R\$ 50.480,95",
             ),
-            CardDemand(
+            CardDashboard(
               icon: Icon(FeatherIcons.user),
               title: '200 Pedidos',
               subtitle: "R\$ 50.480,95",
