@@ -1,3 +1,4 @@
+import 'package:az_proof/app/widgets/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_svg/svg.dart';
@@ -94,9 +95,7 @@ class HomeView extends GetView<HomeController> {
                                 vertical: 25,
                                 horizontal: 40,
                               ),
-                              child: Container(
-                                  // O conteúdo do seu teste fica AQUI!
-                                  ),
+                              child: Content()
                             ),
                             Container(
                               color: Color(0xffF5F5F5),
