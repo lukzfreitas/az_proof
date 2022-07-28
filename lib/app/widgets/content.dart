@@ -1,4 +1,6 @@
 import 'package:az_proof/app/widgets/card_dashboard.dart';
+import 'package:az_proof/app/widgets/pagination/pagination.dart';
+import 'package:az_proof/app/widgets/table/table_dashboard.dart';
 import 'package:az_proof/app/widgets/title_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -34,7 +36,14 @@ class Content extends StatelessWidget {
           ],
         ),
         TitleDashboard(text: "Pedidos"),
-        
+        TableDashboard(),
+        Pagination(itens: [
+          Item(value: 1),
+          Item(value: 2),
+          Item(value: 3, actived: true),
+          Item(value: 4),
+          Item(value: 5)
+        ])
       ],
     );
   }
