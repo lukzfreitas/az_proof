@@ -1,4 +1,5 @@
 import 'package:az_proof/app/widgets/icon_svg.dart';
+import 'package:az_proof/app/widgets/pagination/button_arrow.dart';
 import 'package:az_proof/app/widgets/pagination/button_number.dart';
 import 'package:az_proof/app/widgets/pagination/dropdown_pagination.dart';
 import 'package:az_proof/app/widgets/pagination/label_pagination.dart';
@@ -18,15 +19,9 @@ class Pagination extends StatelessWidget {
   const Pagination({Key? key, required this.itens}) : super(key: key);
 
   List<Widget> getItens() {
-    List<Widget> list = [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: LoadIconSvg(IconsSvg.CHEVRONS_LEFT),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 32.0),
-        child: LoadIconSvg(IconsSvg.ARROW_LEFT),
-      ),
+    List<Widget> list = [      
+      ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_LEFT)),
+      ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_LEFT)),      
     ];
     itens.forEach(
       (Item e) => list.add(
@@ -37,14 +32,8 @@ class Pagination extends StatelessWidget {
       ),
     );
     list.addAll([
-      Padding(
-        padding: const EdgeInsets.only(left: 32.0, right: 8.0),
-        child: LoadIconSvg(IconsSvg.ARROW_RIGHT),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 32.0),
-        child: LoadIconSvg(IconsSvg.CHEVRONS_RIGHT),
-      ),
+      ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_RIGHT)),
+      ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_RIGHT)),      
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: LabelPagination(text: '1 de 10 páginas'),

@@ -1,3 +1,5 @@
+import 'package:az_proof/app/widgets/table/cell_header.dart';
+import 'package:az_proof/app/widgets/table/cell_item.dart';
 import 'package:az_proof/app/widgets/title_dashboard.dart';
 
 import 'package:flutter/material.dart';
@@ -8,49 +10,38 @@ class TableDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Table(
-      children: [Header(), Items()],      
+      children: [Header(), Items(), Items(),],
     );
   }
 
   TableRow Header() {
     return TableRow(
       children: [
-        TableCell(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color(0xffFE877A),
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0)),
-            ),
-            child: TitleDashboard(text: 'Hello world 1'),
-          ),
-        ),
-        TableCell(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color(0xffFE7C6E),
-            ),
-            child: TitleDashboard(text: 'Hello world 2'),
-          ),
-        ),
-        TableCell(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color(0xffFE877A),
-              borderRadius: BorderRadius.only(topRight: Radius.circular(8.0)),
-            ),
-            child: TitleDashboard(text: 'Hello world 3'),
-          ),
-        ),
+        TableCell(child: CellHeader(text: 'ID do Pedido', firstCell: true)),
+        TableCell(child: CellHeader(text: 'ID na Loja')),
+        TableCell(child: CellHeader(text: 'Criação')),
+        TableCell(child: CellHeader(text: 'Nome do cliente')),
+        TableCell(child: CellHeader(text: 'CPF/CNPJ do cliente')),
+        TableCell(child: CellHeader(text: 'Status do pedido')),
+        TableCell(child: CellHeader(text: 'Status do pagamento')),
+        TableCell(child: CellHeader(text: 'Método de pagamento')),
+        TableCell(child: CellHeader(text: 'Total', lastCell: true)),
       ],
     );
   }
 
   TableRow Items() {
-    return TableRow(
+    return TableRow(      
       children: [
-        TableCell(child: TitleDashboard(text: 'Hello world 1')),
-        TableCell(child: TitleDashboard(text: 'Hello world 2')),
-        TableCell(child: TitleDashboard(text: 'Hello world 3')),
+        TableCell(child: CellItem(text: 'Hello world 1', firstCell: true, numberPair: true)),
+        TableCell(child: CellItem(text: 'Hello world 2')),
+        TableCell(child: CellItem(text: 'Hello world 3', numberPair: true)),
+        TableCell(child: CellItem(text: 'Hello world 1')),
+        TableCell(child: CellItem(text: 'Hello world 2', numberPair: true)),
+        TableCell(child: CellItem(text: 'Hello world 3')),
+        TableCell(child: CellItem(text: 'Hello world 1', numberPair: true)),
+        TableCell(child: CellItem(text: 'Hello world 2')),
+        TableCell(child: CellItem(text: 'Hello world 3', lastCell: true, numberPair: true)),
       ],
     );
   }

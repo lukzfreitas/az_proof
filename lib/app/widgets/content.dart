@@ -1,9 +1,9 @@
 import 'package:az_proof/app/widgets/card_dashboard.dart';
+import 'package:az_proof/app/widgets/icon_svg.dart';
 import 'package:az_proof/app/widgets/pagination/pagination.dart';
 import 'package:az_proof/app/widgets/table/table_dashboard.dart';
 import 'package:az_proof/app/widgets/title_dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 class Content extends StatelessWidget {
   const Content({Key? key}) : super(key: key);
@@ -19,19 +19,22 @@ class Content extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CardDashboard(
-              icon: Icon(FeatherIcons.user),
+              icon: LoadIconSvg(IconsSvg.DEMAND),
               title: '200 Pedidos',
               subtitle: "R\$ 50.480,95",
+              color: Color(0xffF4C8E1),
             ),
             CardDashboard(
-              icon: Icon(FeatherIcons.user),
+              icon: LoadIconSvg(IconsSvg.SALES),
               title: '200 Pedidos',
               subtitle: "R\$ 50.480,95",
+              color: Color(0xffB6EEDD),
             ),
             CardDashboard(
-              icon: Icon(FeatherIcons.user),
+              icon: LoadIconSvg(IconsSvg.AVERAGE_TICKET),
               title: '200 Pedidos',
               subtitle: "R\$ 50.480,95",
+              color: Color(0xffC3E7F3),
             ),
           ],
         ),

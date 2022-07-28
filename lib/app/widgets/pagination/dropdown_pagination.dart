@@ -19,14 +19,19 @@ class DropdownPagination extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton(     
-          borderRadius: BorderRadius.circular(8.0),     
+        child: DropdownButton(
+          borderRadius: BorderRadius.circular(8.0),
           value: value,
           items: items,
           onChanged: (String? value) {},
           icon: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.only(left: 32.0),
             child: LoadIconSvg(IconsSvg.ARROW_DOWN),
+          ),
+          style: TextStyle(
+            color: Color(0xff97A1A8),
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),
