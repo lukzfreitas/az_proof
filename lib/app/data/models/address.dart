@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class Address {
   String line1;
-  int line2;
+  String line2;
   String line3;
   String neighborhood;
   String city;
@@ -18,11 +18,11 @@ class Address {
     required this.state,
     required this.postal_code,
     required this.country_code,
-  });
+  });  
 
   Address copyWith({
     String? line1,
-    int? line2,
+    String? line2,
     String? line3,
     String? neighborhood,
     String? city,
@@ -58,7 +58,7 @@ class Address {
   factory Address.fromMap(Map<String, dynamic> map) {
     return Address(
       line1: map['line1'] ?? '',
-      line2: map['line2']?.toInt() ?? 0,
+      line2: map['line2'] ?? '',
       line3: map['line3'] ?? '',
       neighborhood: map['neighborhood'] ?? '',
       city: map['city'] ?? '',

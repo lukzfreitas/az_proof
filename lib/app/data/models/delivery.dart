@@ -1,30 +1,31 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:az_proof/app/data/models/address.dart';
-import 'package:az_proof/app/data/models/history.dart';
 
 class Delivery {
-  History history;
-  Address address;
-  String status;
-  String type;
-  String track_id;
-  String track_url;
-  int amount;
-  String delivery_forecast;
+  List<Address>? history;
+  Address? address;
+  String? status;
+  String? type;
+  String? track_id;
+  String? track_url;
+  int? amount;
+  String? delivery_forecast;
   Delivery({
-    required this.history,
-    required this.address,
-    required this.status,
-    required this.type,
-    required this.track_id,
-    required this.track_url,
-    required this.amount,
-    required this.delivery_forecast,
+    this.history,
+    this.address,
+    this.status,
+    this.type,
+    this.track_id,
+    this.track_url,
+    this.amount,
+    this.delivery_forecast,
   });
 
   Delivery copyWith({
-    History? history,
+    List<Address>? history,
     Address? address,
     String? status,
     String? type,
@@ -47,8 +48,8 @@ class Delivery {
 
   Map<String, dynamic> toMap() {
     return {
-      'history': history.toMap(),
-      'address': address.toMap(),
+      'history': history?.map((x) => x?.toMap())?.toList(),
+      'address': address?.toMap(),
       'status': status,
       'type': type,
       'track_id': track_id,
@@ -60,14 +61,14 @@ class Delivery {
 
   factory Delivery.fromMap(Map<String, dynamic> map) {
     return Delivery(
-      history: History.fromMap(map['history']),
-      address: Address.fromMap(map['address']),
-      status: map['status'] ?? '',
-      type: map['type'] ?? '',
-      track_id: map['track_id'] ?? '',
-      track_url: map['track_url'] ?? '',
-      amount: map['amount']?.toInt() ?? 0,
-      delivery_forecast: map['delivery_forecast'] ?? '',
+      history: map['history'] != null ? List<Address>.from(map['history']?.map((x) => Address.fromMap(x))) : null,
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+      status: map['status'],
+      type: map['type'],
+      track_id: map['track_id'],
+      track_url: map['track_url'],
+      amount: map['amount']?.toInt(),
+      delivery_forecast: map['delivery_forecast'],
     );
   }
 
@@ -85,7 +86,7 @@ class Delivery {
     if (identical(this, other)) return true;
   
     return other is Delivery &&
-      other.history == history &&
+      listEquals(other.history, history) &&
       other.address == address &&
       other.status == status &&
       other.type == type &&

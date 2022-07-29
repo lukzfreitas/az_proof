@@ -3,7 +3,6 @@ import 'package:az_proof/app/widgets/pagination/button_arrow.dart';
 import 'package:az_proof/app/widgets/pagination/button_number.dart';
 import 'package:az_proof/app/widgets/pagination/dropdown_pagination.dart';
 import 'package:az_proof/app/widgets/pagination/label_pagination.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Item {

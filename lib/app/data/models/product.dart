@@ -1,30 +1,45 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
+import 'package:az_proof/app/data/models/coupon.dart';
+import 'package:az_proof/app/data/models/history.dart';
+import 'package:az_proof/app/data/models/promotion.dart';
+
 class Product {
-  String id;
-  String seller_id;
-  String name;
-  int quantity;
-  String sku;
-  String image;
-  String status;
-  int price;
-  int discount;
-  int original_price;
-  bool replacement_coupon;
+  String? id;
+  String? seller_id;
+  String? name;
+  int? quantity;
+  String? sku;
+  String? image;
+  String? status;
+  int? price;
+  int? discount;
+  int? original_price;
+  bool? replacement_coupon;
+  Coupon? coupon;
+  Promotion? promotion;
+  int? amount;
+  List<History>? history;
   Product({
-    required this.id,
-    required this.seller_id,
-    required this.name,
-    required this.quantity,
-    required this.sku,
-    required this.image,
-    required this.status,
-    required this.price,
-    required this.discount,
-    required this.original_price,
-    required this.replacement_coupon,
+    this.id,
+    this.seller_id,
+    this.name,
+    this.quantity,
+    this.sku,
+    this.image,
+    this.status,
+    this.price,
+    this.discount,
+    this.original_price,
+    this.replacement_coupon,
+    this.coupon,
+    this.promotion,
+    this.amount,
+    this.history,
   });
+  
 
   Product copyWith({
     String? id,
@@ -38,6 +53,10 @@ class Product {
     int? discount,
     int? original_price,
     bool? replacement_coupon,
+    Coupon? coupon,
+    Promotion? promotion,
+    int? amount,
+    List<History>? history,
   }) {
     return Product(
       id: id ?? this.id,
@@ -51,6 +70,10 @@ class Product {
       discount: discount ?? this.discount,
       original_price: original_price ?? this.original_price,
       replacement_coupon: replacement_coupon ?? this.replacement_coupon,
+      coupon: coupon ?? this.coupon,
+      promotion: promotion ?? this.promotion,
+      amount: amount ?? this.amount,
+      history: history ?? this.history,
     );
   }
 
@@ -67,22 +90,30 @@ class Product {
       'discount': discount,
       'original_price': original_price,
       'replacement_coupon': replacement_coupon,
+      'coupon': coupon?.toMap(),
+      'promotion': promotion?.toMap(),
+      'amount': amount,
+      'history': history?.map((x) => x?.toMap())?.toList(),
     };
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      id: map['id'] ?? '',
-      seller_id: map['seller_id'] ?? '',
-      name: map['name'] ?? '',
-      quantity: map['quantity']?.toInt() ?? 0,
-      sku: map['sku'] ?? '',
-      image: map['image'] ?? '',
-      status: map['status'] ?? '',
-      price: map['price']?.toInt() ?? 0,
-      discount: map['discount']?.toInt() ?? 0,
-      original_price: map['original_price']?.toInt() ?? 0,
-      replacement_coupon: map['replacement_coupon'] ?? false,
+      id: map['id'],
+      seller_id: map['seller_id'],
+      name: map['name'],
+      quantity: map['quantity']?.toInt(),
+      sku: map['sku'],
+      image: map['image'],
+      status: map['status'],
+      price: map['price']?.toInt(),
+      discount: map['discount']?.toInt(),
+      original_price: map['original_price']?.toInt(),
+      replacement_coupon: map['replacement_coupon'],
+      coupon: map['coupon'] != null ? Coupon.fromMap(map['coupon']) : null,
+      promotion: map['promotion'] != null ? Promotion.fromMap(map['promotion']) : null,
+      amount: map['amount']?.toInt(),
+      history: map['history'] != null ? List<History>.from(map['history']?.map((x) => History.fromMap(x))) : null,
     );
   }
 
@@ -92,7 +123,7 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, status: $status, price: $price, discount: $discount, original_price: $original_price, replacement_coupon: $replacement_coupon)';
+    return 'Product(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, status: $status, price: $price, discount: $discount, original_price: $original_price, replacement_coupon: $replacement_coupon, coupon: $coupon, promotion: $promotion, amount: $amount, history: $history)';
   }
 
   @override
@@ -110,7 +141,11 @@ class Product {
       other.price == price &&
       other.discount == discount &&
       other.original_price == original_price &&
-      other.replacement_coupon == replacement_coupon;
+      other.replacement_coupon == replacement_coupon &&
+      other.coupon == coupon &&
+      other.promotion == promotion &&
+      other.amount == amount &&
+      listEquals(other.history, history);
   }
 
   @override
@@ -125,6 +160,10 @@ class Product {
       price.hashCode ^
       discount.hashCode ^
       original_price.hashCode ^
-      replacement_coupon.hashCode;
+      replacement_coupon.hashCode ^
+      coupon.hashCode ^
+      promotion.hashCode ^
+      amount.hashCode ^
+      history.hashCode;
   }
 }
