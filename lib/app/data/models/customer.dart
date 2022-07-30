@@ -1,25 +1,25 @@
 import 'dart:convert';
 
-class Custumer {
-  String name;
-  String doc;
-  String email;
-  String phone;
-  Custumer({
-    required this.name,
-    required this.doc,
-    required this.email,
-    required this.phone,
+class Customer {
+  String? name;
+  String? doc;
+  String? email;
+  String? phone;
+  Customer({
+    this.name,
+    this.doc,
+    this.email,
+    this.phone,
   });
   
 
-  Custumer copyWith({
+  Customer copyWith({
     String? name,
     String? doc,
     String? email,
     String? phone,
   }) {
-    return Custumer(
+    return Customer(
       name: name ?? this.name,
       doc: doc ?? this.doc,
       email: email ?? this.email,
@@ -36,29 +36,29 @@ class Custumer {
     };
   }
 
-  factory Custumer.fromMap(Map<String, dynamic> map) {
-    return Custumer(
-      name: map['name'] ?? '',
-      doc: map['doc'] ?? '',
-      email: map['email'] ?? '',
-      phone: map['phone'] ?? '',
+  factory Customer.fromMap(Map<String, dynamic> map) {
+    return Customer(
+      name: map['name'],
+      doc: map['doc'],
+      email: map['email'],
+      phone: map['phone'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Custumer.fromJson(String source) => Custumer.fromMap(json.decode(source));
+  factory Customer.fromJson(String source) => Customer.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Custumer(name: $name, doc: $doc, email: $email, phone: $phone)';
+    return 'Customer(name: $name, doc: $doc, email: $email, phone: $phone)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Custumer &&
+    return other is Customer &&
       other.name == name &&
       other.doc == doc &&
       other.email == email &&

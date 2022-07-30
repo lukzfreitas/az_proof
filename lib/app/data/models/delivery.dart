@@ -9,7 +9,7 @@ class Delivery {
   Address? address;
   String? status;
   String? type;
-  String? track_id;
+  String track_id;
   String? track_url;
   int? amount;
   String? delivery_forecast;
@@ -18,11 +18,12 @@ class Delivery {
     this.address,
     this.status,
     this.type,
-    this.track_id,
+    required this.track_id,
     this.track_url,
     this.amount,
     this.delivery_forecast,
   });
+  
 
   Delivery copyWith({
     List<Address>? history,
@@ -65,7 +66,7 @@ class Delivery {
       address: map['address'] != null ? Address.fromMap(map['address']) : null,
       status: map['status'],
       type: map['type'],
-      track_id: map['track_id'],
+      track_id: map['track_id'] ?? '',
       track_url: map['track_url'],
       amount: map['amount']?.toInt(),
       delivery_forecast: map['delivery_forecast'],

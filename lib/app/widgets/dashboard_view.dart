@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardView extends GetView<HomeController> {
-  final controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {

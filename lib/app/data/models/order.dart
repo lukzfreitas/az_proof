@@ -1,5 +1,5 @@
 import 'package:az_proof/app/data/models/coupon.dart';
-import 'package:az_proof/app/data/models/custumer.dart';
+import 'package:az_proof/app/data/models/customer.dart';
 import 'package:az_proof/app/data/models/delivery.dart';
 import 'package:az_proof/app/data/models/invoices.dart';
 import 'package:az_proof/app/data/models/partner.dart';
@@ -8,7 +8,7 @@ import 'package:az_proof/app/data/models/product.dart';
 import 'package:az_proof/app/data/models/seller.dart';
 
 class Order {
-  Custumer? custumer;
+  Customer? customer;
   Seller? seller;
   Payment? payment;
   Delivery? delivery;
@@ -23,8 +23,8 @@ class Order {
   String? updatedAt;
 
   Order.fromJson(Map<String, dynamic> map) {
-    custumer =
-        map['custumer'] != null ? Custumer.fromMap(map['custumer']) : null;
+    customer =
+        map['customer'] != null ? Customer.fromMap(map['customer']) : null;
     seller = map['seller'] != null ? Seller.fromMap(map['seller']) : null;
     payment = map['payment'] != null ? Payment.fromMap(map['payment']) : null;
     delivery =

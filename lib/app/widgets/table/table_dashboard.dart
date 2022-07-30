@@ -1,16 +1,23 @@
+import 'package:az_proof/app/data/models/order.dart';
+import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
+import 'package:az_proof/app/utils/date.dart';
+import 'package:az_proof/app/utils/doc.dart';
 import 'package:az_proof/app/widgets/table/cell_header.dart';
 import 'package:az_proof/app/widgets/table/cell_item.dart';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class TableDashboard extends StatelessWidget {
-  const TableDashboard({Key? key}) : super(key: key);
+class TableDashboard extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      children: [Header(), Items(), Items(),],
-    );
+    return Obx(() {
+      List<TableRow> orders = [Header()];
+      orders.addAll(List.from(controller.orders.map((order) => Items(order))));
+      return Table(children: orders);
+  });
+    
+    
   }
 
   TableRow Header() {
@@ -29,18 +36,22 @@ class TableDashboard extends StatelessWidget {
     );
   }
 
-  TableRow Items() {
-    return TableRow(      
+  TableRow Items(Order order) {
+    return TableRow(
       children: [
-        TableCell(child: CellItem(text: 'Hello world 1', firstCell: true, numberPair: true)),
-        TableCell(child: CellItem(text: 'Hello world 2')),
-        TableCell(child: CellItem(text: 'Hello world 3', numberPair: true)),
-        TableCell(child: CellItem(text: 'Hello world 1')),
-        TableCell(child: CellItem(text: 'Hello world 2', numberPair: true)),
-        TableCell(child: CellItem(text: 'Hello world 3')),
-        TableCell(child: CellItem(text: 'Hello world 1', numberPair: true)),
-        TableCell(child: CellItem(text: 'Hello world 2')),
-        TableCell(child: CellItem(text: 'Hello world 3', lastCell: true, numberPair: true)),
+        TableCell(
+            child: CellItem(
+                text: order.delivery!.track_id, firstCell: true, numberPair: true)),
+        TableCell(child: CellItem(text: order.seller!.id)),
+        TableCell(child: CellItem(text: Date.convertDate(order.createdAt.toString()), numberPair: true)),
+        TableCell(child: CellItem(text: order.customer!.name!.toString())),
+        TableCell(child: CellItem(text: Doc.convertDoc(order.customer!.doc.toString()), numberPair: true)),
+        TableCell(child: CellItem(text: order.delivery!.status.toString())),
+        TableCell(child: CellItem(text: order.payment!.status, numberPair: true)),
+        TableCell(child: CellItem(text: order.payment!.method)),
+        TableCell(
+            child: CellItem(
+                text: 'Hello world 3', lastCell: true, numberPair: true)),
       ],
     );
   }
