@@ -3,6 +3,7 @@ import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
 import 'package:az_proof/app/utils/currency.dart';
 import 'package:az_proof/app/utils/date.dart';
 import 'package:az_proof/app/utils/doc.dart';
+import 'package:az_proof/app/utils/language.dart';
 import 'package:az_proof/app/widgets/table/cell_header.dart';
 import 'package:az_proof/app/widgets/table/cell_item.dart';
 import 'package:flutter/material.dart';
@@ -52,10 +53,10 @@ class TableDashboard extends GetView<HomeController> {
             child: CellItem(
                 text: Doc.convertDoc(order.customer!.doc.toString()),
                 numberPair: true)),
-        TableCell(child: CellItem(text: order.delivery!.status.toString())),
+        TableCell(child: CellItem(text: Language.convertToPortuguese(order.delivery!.status.toString()))),
         TableCell(
-            child: CellItem(text: order.payment!.status, numberPair: true)),
-        TableCell(child: CellItem(text: order.payment!.method)),
+            child: CellItem(text: Language.convertToPortuguese(order.payment!.status), numberPair: true)),
+        TableCell(child: CellItem(text: Language.convertToPortuguese(order.payment!.method))),
         TableCell(
             child: CellItem(
                 text: Currency.convertToBRL(order.delivery!.amount!.toDouble()),
