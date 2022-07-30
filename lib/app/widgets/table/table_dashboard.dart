@@ -39,24 +39,32 @@ class TableDashboard extends GetView<HomeController> {
     return TableRow(
       children: [
         TableCell(
-            child: CellItem(
-                text: order.id.toString(),
-                firstCell: true,
-                numberPair: true)),
+          child: CellItem(
+              text: order.id.toString(), firstCell: true, numberPair: true),
+        ),
         TableCell(child: CellItem(text: order.seller!.id)),
         TableCell(
-            child: CellItem(
-                text: Date.convertDate(order.createdAt.toString()),
-                numberPair: true)),
+          child: CellItem(
+              text: Date.convertDate(order.createdAt.toString()),
+              numberPair: true),
+        ),
         TableCell(child: CellItem(text: order.customer!.name!.toString())),
         TableCell(
-            child: CellItem(
-                text: Doc.convertDoc(order.customer!.doc.toString()),
-                numberPair: true)),
-        TableCell(child: CellItem(text: Language.convertToPortuguese(order.delivery!.status.toString()))),
+          child: CellItem(
+              text: Doc.convertDoc(order.customer!.doc.toString()),
+              numberPair: true),
+        ),
         TableCell(
-            child: CellItem(text: Language.convertToPortuguese(order.payment!.status), numberPair: true)),
-        TableCell(child: CellItem(text: Language.convertToPortuguese(order.payment!.method))),
+            child: CellItem(
+          text: Language.convertToPortuguese(order.delivery!.status.toString()),
+        )),
+        TableCell(
+            child: CellItem(
+                text: Language.convertToPortuguese(order.payment!.status),
+                numberPair: true)),
+        TableCell(
+            child: CellItem(
+                text: Language.convertToPortuguese(order.payment!.method))),
         TableCell(
             child: CellItem(
                 text: Currency.convertToBRL(order.delivery!.amount!.toDouble()),

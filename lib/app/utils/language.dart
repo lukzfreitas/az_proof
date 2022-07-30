@@ -15,7 +15,9 @@ class Language {
       case LabelEnglishConstant.SUCCESSEDED:
         return LabelPortugueseConstant.SUCCESSEDED;
       case 'aprovada':
-        return value;
+        return 'Aprovada';
+      case 'boleto':
+        return 'Boleto';
       default:
         return 'Não informado';
     }

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardView extends GetView<HomeController> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,13 +43,9 @@ class DashboardView extends GetView<HomeController> {
         ),
         TitleDashboard(text: "Pedidos"),
         TableDashboard(),
-        Pagination(itens: [
-          Item(value: 1),
-          Item(value: 2),
-          Item(value: 3, actived: true),
-          Item(value: 4),
-          Item(value: 5)
-        ])
+        Pagination(          
+          pagesPerRow: ["05", "06", "07", "08", "09", "10", "15", "20"],
+        ),
       ],
     );
   }

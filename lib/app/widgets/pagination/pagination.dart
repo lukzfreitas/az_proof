@@ -1,9 +1,11 @@
+import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
 import 'package:az_proof/app/widgets/icon_svg.dart';
 import 'package:az_proof/app/widgets/pagination/button_arrow.dart';
 import 'package:az_proof/app/widgets/pagination/button_number.dart';
 import 'package:az_proof/app/widgets/pagination/dropdown_pagination.dart';
 import 'package:az_proof/app/widgets/pagination/label_pagination.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Item {
   int value;
@@ -12,17 +14,23 @@ class Item {
   Item({required this.value, this.actived = false});
 }
 
-class Pagination extends StatelessWidget {
-  final List<Item> itens;
+class Pagination extends GetView<HomeController> {
+  
+  final List<String> pagesPerRow;
+  
 
-  const Pagination({Key? key, required this.itens}) : super(key: key);
+  const Pagination({
+    Key? key,    
+    required this.pagesPerRow,    
+  }) : super(key: key);
 
-  List<Widget> getItens() {
-    List<Widget> list = [      
+  List<Widget> _getItens(List<Item> items) {
+    List<Widget> list = [
       ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_LEFT)),
-      ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_LEFT)),      
+      ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_LEFT)),
     ];
-    itens.forEach(
+    
+    items.forEach(
       (Item e) => list.add(
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -30,15 +38,28 @@ class Pagination extends StatelessWidget {
         ),
       ),
     );
+
     list.addAll([
       ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_RIGHT)),
-      ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_RIGHT)),      
+      ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_RIGHT)),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: LabelPagination(text: '1 de 10 páginas'),
+        child: Obx(() =>
+            LabelPagination(text: '1 de ${controller.totalPages} páginas')),
       ),
     ]);
     return list;
+  }
+
+  _getPagesPorRow() {
+    return pagesPerRow
+        .map(
+          (String map) => DropdownMenuItem(
+            child: Text(map),
+            value: map,
+          ),
+        )
+        .toList();
   }
 
   @override
@@ -55,7 +76,7 @@ class Pagination extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(children: getItens()),
+          Obx(() => Row(children: _getItens(controller.pagesItem))),
           Row(
             children: [
               Padding(
@@ -64,42 +85,7 @@ class Pagination extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: DropdownPagination(
-                  items: [
-                    DropdownMenuItem(
-                      child: Text('05'),
-                      value: '05',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('06'),
-                      value: '06',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('07'),
-                      value: '07',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('08'),
-                      value: '08',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('09'),
-                      value: '09',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('10'),
-                      value: '10',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('15'),
-                      value: '15',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('20'),
-                      value: '20',
-                    ),
-                  ],
-                ),
+                child: DropdownPagination(items: _getPagesPorRow()),
               )
             ],
           )
