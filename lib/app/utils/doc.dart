@@ -3,7 +3,10 @@ class Doc {
     if (value.length == 11) {
       return _formatCPF(value);
     }
-    return _formatCNPJ(value);
+    if (value.length == 14) {
+      return _formatCNPJ(value);
+    }
+    return "Documento não informado";    
   }
 
   static String _formatCPF(String value) {
