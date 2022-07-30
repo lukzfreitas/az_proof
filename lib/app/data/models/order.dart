@@ -29,10 +29,9 @@ class Order {
     payment = map['payment'] != null ? Payment.fromMap(map['payment']) : null;
     delivery =
         map['delivery'] != null ? Delivery.fromMap(map['delivery']) : null;
-    // products = map['products'] != null
-    //     ? List<Product>.from(map['products']?.map((x) => Product.fromMap(x)))
-    //     : null;
-    products = [];
+    products = map['products'] != null
+        ? List<Product>.from(map['products']?.map((x) => Product.fromMap(x)))
+        : null;    
     id = map['id'];
     coupon = map['coupon'] != null ? Coupon.fromMap(map['coupon']) : null;
     invoices = map['invoices'] != null

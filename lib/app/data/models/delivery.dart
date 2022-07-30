@@ -48,7 +48,7 @@ class Delivery {
 
   Map<String, dynamic> toMap() {
     return {
-      'history': history?.map((x) => x?.toMap())?.toList(),
+      'history': history?.map((x) => x.toMap()).toList(),
       'address': address?.toMap(),
       'status': status,
       'type': type,

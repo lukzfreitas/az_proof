@@ -22,6 +22,7 @@ class Product {
   Promotion? promotion;
   int? amount;
   List<History>? history;
+  bool? active;
   Product({
     this.id,
     this.seller_id,
@@ -38,8 +39,8 @@ class Product {
     this.promotion,
     this.amount,
     this.history,
+    this.active,
   });
-  
 
   Product copyWith({
     String? id,
@@ -57,6 +58,7 @@ class Product {
     Promotion? promotion,
     int? amount,
     List<History>? history,
+    bool? active,
   }) {
     return Product(
       id: id ?? this.id,
@@ -74,6 +76,7 @@ class Product {
       promotion: promotion ?? this.promotion,
       amount: amount ?? this.amount,
       history: history ?? this.history,
+      active: active ?? this.active,
     );
   }
 
@@ -93,7 +96,8 @@ class Product {
       'coupon': coupon?.toMap(),
       'promotion': promotion?.toMap(),
       'amount': amount,
-      'history': history?.map((x) => x?.toMap())?.toList(),
+      'history': history?.map((x) => x.toMap()).toList(),
+      'active': active,
     };
   }
 
@@ -114,6 +118,7 @@ class Product {
       promotion: map['promotion'] != null ? Promotion.fromMap(map['promotion']) : null,
       amount: map['amount']?.toInt(),
       history: map['history'] != null ? List<History>.from(map['history']?.map((x) => History.fromMap(x))) : null,
+      active: map['active'],
     );
   }
 
@@ -123,7 +128,7 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, status: $status, price: $price, discount: $discount, original_price: $original_price, replacement_coupon: $replacement_coupon, coupon: $coupon, promotion: $promotion, amount: $amount, history: $history)';
+    return 'Product(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, status: $status, price: $price, discount: $discount, original_price: $original_price, replacement_coupon: $replacement_coupon, coupon: $coupon, promotion: $promotion, amount: $amount, history: $history, active: $active)';
   }
 
   @override
@@ -145,7 +150,8 @@ class Product {
       other.coupon == coupon &&
       other.promotion == promotion &&
       other.amount == amount &&
-      listEquals(other.history, history);
+      listEquals(other.history, history) &&
+      other.active == active;
   }
 
   @override
@@ -164,6 +170,7 @@ class Product {
       coupon.hashCode ^
       promotion.hashCode ^
       amount.hashCode ^
-      history.hashCode;
+      history.hashCode ^
+      active.hashCode;
   }
 }

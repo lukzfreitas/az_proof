@@ -1,24 +1,26 @@
 import 'dart:convert';
 
 class Address {
-  String line1;
-  String line2;
-  String line3;
-  String neighborhood;
-  String city;
-  String state;
-  String postal_code;
-  String country_code;
+  String? line1;
+  String? line2;
+  String? line3;
+  String? neighborhood;
+  String? city;
+  String? state;
+  String? postal_code;
+  String? country_code; 
   Address({
-    required this.line1,
-    required this.line2,
-    required this.line3,
-    required this.neighborhood,
-    required this.city,
-    required this.state,
-    required this.postal_code,
-    required this.country_code,
-  });  
+    this.line1,
+    this.line2,
+    this.line3,
+    this.neighborhood,
+    this.city,
+    this.state,
+    this.postal_code,
+    this.country_code,
+  });
+
+  
 
   Address copyWith({
     String? line1,
@@ -57,14 +59,14 @@ class Address {
 
   factory Address.fromMap(Map<String, dynamic> map) {
     return Address(
-      line1: map['line1'] ?? '',
-      line2: map['line2'] ?? '',
-      line3: map['line3'] ?? '',
-      neighborhood: map['neighborhood'] ?? '',
-      city: map['city'] ?? '',
-      state: map['state'] ?? '',
-      postal_code: map['postal_code'] ?? '',
-      country_code: map['country_code'] ?? '',
+      line1: map['line1'],
+      line2: map['line2'],
+      line3: map['line3'],
+      neighborhood: map['neighborhood'],
+      city: map['city'],
+      state: map['state'],
+      postal_code: map['postal_code'],
+      country_code: map['country_code'],
     );
   }
 
