@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-class Customer {
+class CustomerModel {
   String? name;
   String? doc;
   String? email;
   String? phone;
-  Customer({
+  CustomerModel({
     this.name,
     this.doc,
     this.email,
@@ -13,13 +13,13 @@ class Customer {
   });
   
 
-  Customer copyWith({
+  CustomerModel copyWith({
     String? name,
     String? doc,
     String? email,
     String? phone,
   }) {
-    return Customer(
+    return CustomerModel(
       name: name ?? this.name,
       doc: doc ?? this.doc,
       email: email ?? this.email,
@@ -36,8 +36,8 @@ class Customer {
     };
   }
 
-  factory Customer.fromMap(Map<String, dynamic> map) {
-    return Customer(
+  factory CustomerModel.fromMap(Map<String, dynamic> map) {
+    return CustomerModel(
       name: map['name'],
       doc: map['doc'],
       email: map['email'],
@@ -47,18 +47,18 @@ class Customer {
 
   String toJson() => json.encode(toMap());
 
-  factory Customer.fromJson(String source) => Customer.fromMap(json.decode(source));
+  factory CustomerModel.fromJson(String source) => CustomerModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Customer(name: $name, doc: $doc, email: $email, phone: $phone)';
+    return 'CustomerModel(name: $name, doc: $doc, email: $email, phone: $phone)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Customer &&
+    return other is CustomerModel &&
       other.name == name &&
       other.doc == doc &&
       other.email == email &&

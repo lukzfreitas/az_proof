@@ -1,4 +1,4 @@
-import 'package:az_proof/app/data/models/order.dart';
+import 'package:az_proof/app/data/models/order_model.dart';
 import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
 import 'package:az_proof/app/utils/currency.dart';
 import 'package:az_proof/app/utils/date.dart';
@@ -35,7 +35,7 @@ class TableDashboard extends GetView<HomeController> {
     );
   }
 
-  TableRow Items(Order order) {
+  TableRow Items(OrderModel order) {
     return TableRow(
       children: [
         TableCell(

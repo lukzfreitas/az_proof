@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-class Partner {
+class PartnerModel {
   String id;
   String name;
   String doc;
   int sales_comission;
   int sales_percentual;
-  Partner({
+  PartnerModel({
     required this.id,
     required this.name,
     required this.doc,
@@ -14,14 +14,14 @@ class Partner {
     required this.sales_percentual,
   });
 
-  Partner copyWith({
+  PartnerModel copyWith({
     String? id,
     String? name,
     String? doc,
     int? sales_comission,
     int? sales_percentual,
   }) {
-    return Partner(
+    return PartnerModel(
       id: id ?? this.id,
       name: name ?? this.name,
       doc: doc ?? this.doc,
@@ -40,8 +40,8 @@ class Partner {
     };
   }
 
-  factory Partner.fromMap(Map<String, dynamic> map) {
-    return Partner(
+  factory PartnerModel.fromMap(Map<String, dynamic> map) {
+    return PartnerModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       doc: map['doc'] ?? '',
@@ -52,18 +52,18 @@ class Partner {
 
   String toJson() => json.encode(toMap());
 
-  factory Partner.fromJson(String source) => Partner.fromMap(json.decode(source));
+  factory PartnerModel.fromJson(String source) => PartnerModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Partner(id: $id, name: $name, doc: $doc, sales_comission: $sales_comission, sales_percentual: $sales_percentual)';
+    return 'PartnerModel(id: $id, name: $name, doc: $doc, sales_comission: $sales_comission, sales_percentual: $sales_percentual)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Partner &&
+    return other is PartnerModel &&
       other.id == id &&
       other.name == name &&
       other.doc == doc &&

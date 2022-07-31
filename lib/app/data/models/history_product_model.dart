@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class History {
+class HistoryModel {
   String id;
   String seller_id;
   String name;
@@ -10,7 +10,7 @@ class History {
   int amount;
   int discount;
   int original_amount;
-  History({
+  HistoryModel({
     required this.id,
     required this.seller_id,
     required this.name,
@@ -22,7 +22,7 @@ class History {
     required this.original_amount,
   });
 
-  History copyWith({
+  HistoryModel copyWith({
     String? id,
     String? seller_id,
     String? name,
@@ -33,7 +33,7 @@ class History {
     int? discount,
     int? original_amount,
   }) {
-    return History(
+    return HistoryModel(
       id: id ?? this.id,
       seller_id: seller_id ?? this.seller_id,
       name: name ?? this.name,
@@ -60,8 +60,8 @@ class History {
     };
   }
 
-  factory History.fromMap(Map<String, dynamic> map) {
-    return History(
+  factory HistoryModel.fromMap(Map<String, dynamic> map) {
+    return HistoryModel(
       id: map['id'] ?? '',
       seller_id: map['seller_id'] ?? '',
       name: map['name'] ?? '',
@@ -76,18 +76,18 @@ class History {
 
   String toJson() => json.encode(toMap());
 
-  factory History.fromJson(String source) => History.fromMap(json.decode(source));
+  factory HistoryModel.fromJson(String source) => HistoryModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'History(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, amount: $amount, discount: $discount, original_amount: $original_amount)';
+    return 'HistoryModel(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, amount: $amount, discount: $discount, original_amount: $original_amount)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is History &&
+    return other is HistoryModel &&
       other.id == id &&
       other.seller_id == seller_id &&
       other.name == name &&

@@ -2,21 +2,21 @@
 
 // import 'package:flutter/foundation.dart';
 
-import 'package:az_proof/app/data/models/order.dart';
+import 'package:az_proof/app/data/models/order_model.dart';
 
-class ResponseDashboard {
+class ResponseDashboardModel {
   double? orders_total;
   int? orders_count;
   double? sales_total;
   int? sales_count;
-  List<Order>? orders;
+  List<OrderModel>? orders;
   double? average_ticket;
   bool? has_more;
   int? limit;
   int? total_pages;
   int? page;
   int? total;
-  ResponseDashboard({
+  ResponseDashboardModel({
     this.orders_total,
     this.orders_count,
     this.sales_total,
@@ -30,12 +30,12 @@ class ResponseDashboard {
     this.total,
   });  
 
-  ResponseDashboard.fromJson(Map<String, dynamic> json) {
+  ResponseDashboardModel.fromJson(Map<String, dynamic> json) {
     orders_total = json['orders_total'];
     orders_count = json['orders_count'];
     sales_total = json['sales_total'];
     sales_count = json['sales_count'];
-    orders = List<Order>.from(json['orders']?.map((x) => Order.fromJson(x)));
+    orders = List<OrderModel>.from(json['orders']?.map((x) => OrderModel.fromJson(x)));
     average_ticket = json['average_ticket'];
     has_more = json['has_more'];
     limit = json['limit'];

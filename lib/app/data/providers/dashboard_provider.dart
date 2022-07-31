@@ -1,4 +1,4 @@
-import 'package:az_proof/app/data/models/response_dashboard.dart';
+import 'package:az_proof/app/data/models/response_dashboard_model.dart';
 import 'package:dio/dio.dart';
 import '../preferences/user_preferences.dart';
 
@@ -27,7 +27,7 @@ class DashboardProvider {
     return options;
   }
 
-  Future<ResponseDashboard?> getDashboard() async {
+  Future<ResponseDashboardModel?> getDashboard() async {
     try {
       Options opt = await _getOption();
       final response = await request.get(
@@ -37,7 +37,7 @@ class DashboardProvider {
 
       if (response.statusCode == 200) {
         var data = response.data;
-        ResponseDashboard value = ResponseDashboard.fromJson(data);
+        ResponseDashboardModel value = ResponseDashboardModel.fromJson(data);
         return value;
       } else {
         _error = response.data['message'];

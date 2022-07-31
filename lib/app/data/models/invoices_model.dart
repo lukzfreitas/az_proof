@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class Invoices {
+class InvoicesModel {
   String id;
   String createdAt;
   String status;
-  Invoices({
+  InvoicesModel({
     required this.id,
     required this.createdAt,
     required this.status,
   });
 
-  Invoices copyWith({
+  InvoicesModel copyWith({
     String? id,
     String? createdAt,
     String? status,
   }) {
-    return Invoices(
+    return InvoicesModel(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
       status: status ?? this.status,
@@ -30,8 +30,8 @@ class Invoices {
     };
   }
 
-  factory Invoices.fromMap(Map<String, dynamic> map) {
-    return Invoices(
+  factory InvoicesModel.fromMap(Map<String, dynamic> map) {
+    return InvoicesModel(
       id: map['id'] ?? '',
       createdAt: map['createdAt'] ?? '',
       status: map['status'] ?? '',
@@ -40,16 +40,16 @@ class Invoices {
 
   String toJson() => json.encode(toMap());
 
-  factory Invoices.fromJson(String source) => Invoices.fromMap(json.decode(source));
+  factory InvoicesModel.fromJson(String source) => InvoicesModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Invoices(id: $id, createdAt: $createdAt, status: $status)';
+  String toString() => 'InvoicesModel(id: $id, createdAt: $createdAt, status: $status)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Invoices &&
+    return other is InvoicesModel &&
       other.id == id &&
       other.createdAt == createdAt &&
       other.status == status;

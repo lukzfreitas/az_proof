@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Address {
+class AddressModel {
   String? line1;
   String? line2;
   String? line3;
@@ -9,7 +9,7 @@ class Address {
   String? state;
   String? postal_code;
   String? country_code; 
-  Address({
+  AddressModel({
     this.line1,
     this.line2,
     this.line3,
@@ -22,7 +22,7 @@ class Address {
 
   
 
-  Address copyWith({
+  AddressModel copyWith({
     String? line1,
     String? line2,
     String? line3,
@@ -32,7 +32,7 @@ class Address {
     String? postal_code,
     String? country_code,
   }) {
-    return Address(
+    return AddressModel(
       line1: line1 ?? this.line1,
       line2: line2 ?? this.line2,
       line3: line3 ?? this.line3,
@@ -57,8 +57,8 @@ class Address {
     };
   }
 
-  factory Address.fromMap(Map<String, dynamic> map) {
-    return Address(
+  factory AddressModel.fromMap(Map<String, dynamic> map) {
+    return AddressModel(
       line1: map['line1'],
       line2: map['line2'],
       line3: map['line3'],
@@ -72,18 +72,18 @@ class Address {
 
   String toJson() => json.encode(toMap());
 
-  factory Address.fromJson(String source) => Address.fromMap(json.decode(source));
+  factory AddressModel.fromJson(String source) => AddressModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Address(line1: $line1, line2: $line2, line3: $line3, neighborhood: $neighborhood, city: $city, state: $state, postal_code: $postal_code, country_code: $country_code)';
+    return 'AddressModel(line1: $line1, line2: $line2, line3: $line3, neighborhood: $neighborhood, city: $city, state: $state, postal_code: $postal_code, country_code: $country_code)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Address &&
+    return other is AddressModel &&
       other.line1 == line1 &&
       other.line2 == line2 &&
       other.line3 == line3 &&

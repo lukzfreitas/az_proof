@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Payment {
+class PaymentModel {
   int amount;
   int original_amount;
   String status;
@@ -9,7 +9,7 @@ class Payment {
   String transaction_id;
   int installments;
   String date;
-  Payment({
+  PaymentModel({
     required this.amount,
     required this.original_amount,
     required this.status,
@@ -20,7 +20,7 @@ class Payment {
     required this.date,
   });
 
-  Payment copyWith({
+  PaymentModel copyWith({
     int? amount,
     int? original_amount,
     String? status,
@@ -30,7 +30,7 @@ class Payment {
     int? installments,
     String? date,
   }) {
-    return Payment(
+    return PaymentModel(
       amount: amount ?? this.amount,
       original_amount: original_amount ?? this.original_amount,
       status: status ?? this.status,
@@ -55,8 +55,8 @@ class Payment {
     };
   }
 
-  factory Payment.fromMap(Map<String, dynamic> map) {
-    return Payment(
+  factory PaymentModel.fromMap(Map<String, dynamic> map) {
+    return PaymentModel(
       amount: map['amount']?.toInt() ?? 0,
       original_amount: map['original_amount']?.toInt() ?? 0,
       status: map['status'] ?? '',
@@ -70,18 +70,18 @@ class Payment {
 
   String toJson() => json.encode(toMap());
 
-  factory Payment.fromJson(String source) => Payment.fromMap(json.decode(source));
+  factory PaymentModel.fromJson(String source) => PaymentModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Payment(amount: $amount, original_amount: $original_amount, status: $status, discount: $discount, method: $method, transaction_id: $transaction_id, installments: $installments, date: $date)';
+    return 'PaymentModel(amount: $amount, original_amount: $original_amount, status: $status, discount: $discount, method: $method, transaction_id: $transaction_id, installments: $installments, date: $date)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Payment &&
+    return other is PaymentModel &&
       other.amount == amount &&
       other.original_amount == original_amount &&
       other.status == status &&

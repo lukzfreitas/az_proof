@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-class Promotion {
+class PromotionModel {
   int discount;
   int percentual;
-  Promotion({
+  PromotionModel({
     required this.discount,
     required this.percentual,
   });
 
-  Promotion copyWith({
+  PromotionModel copyWith({
     int? discount,
     int? percentual,
   }) {
-    return Promotion(
+    return PromotionModel(
       discount: discount ?? this.discount,
       percentual: percentual ?? this.percentual,
     );
@@ -25,8 +25,8 @@ class Promotion {
     };
   }
 
-  factory Promotion.fromMap(Map<String, dynamic> map) {
-    return Promotion(
+  factory PromotionModel.fromMap(Map<String, dynamic> map) {
+    return PromotionModel(
       discount: map['discount']?.toInt() ?? 0,
       percentual: map['percentual']?.toInt() ?? 0,
     );
@@ -34,16 +34,16 @@ class Promotion {
 
   String toJson() => json.encode(toMap());
 
-  factory Promotion.fromJson(String source) => Promotion.fromMap(json.decode(source));
+  factory PromotionModel.fromJson(String source) => PromotionModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Promotion(discount: $discount, percentual: $percentual)';
+  String toString() => 'PromotionModel(discount: $discount, percentual: $percentual)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Promotion &&
+    return other is PromotionModel &&
       other.discount == discount &&
       other.percentual == percentual;
   }

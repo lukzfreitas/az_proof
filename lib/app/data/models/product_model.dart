@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:az_proof/app/data/models/coupon.dart';
-import 'package:az_proof/app/data/models/history.dart';
-import 'package:az_proof/app/data/models/promotion.dart';
+import 'package:az_proof/app/data/models/coupon_model.dart';
+import 'package:az_proof/app/data/models/history_model.dart';
+import 'package:az_proof/app/data/models/promotion_model.dart';
 
-class Product {
+class ProductModel {
   String? id;
   String? seller_id;
   String? name;
@@ -18,12 +18,12 @@ class Product {
   int? discount;
   int? original_price;
   bool? replacement_coupon;
-  Coupon? coupon;
-  Promotion? promotion;
+  CouponModel? coupon;
+  PromotionModel? promotion;
   int? amount;
-  List<History>? history;
+  List<HistoryModel>? history;
   bool? active;
-  Product({
+  ProductModel({
     this.id,
     this.seller_id,
     this.name,
@@ -42,7 +42,7 @@ class Product {
     this.active,
   });
 
-  Product copyWith({
+  ProductModel copyWith({
     String? id,
     String? seller_id,
     String? name,
@@ -54,13 +54,13 @@ class Product {
     int? discount,
     int? original_price,
     bool? replacement_coupon,
-    Coupon? coupon,
-    Promotion? promotion,
+    CouponModel? coupon,
+    PromotionModel? promotion,
     int? amount,
-    List<History>? history,
+    List<HistoryModel>? history,
     bool? active,
   }) {
-    return Product(
+    return ProductModel(
       id: id ?? this.id,
       seller_id: seller_id ?? this.seller_id,
       name: name ?? this.name,
@@ -101,8 +101,8 @@ class Product {
     };
   }
 
-  factory Product.fromMap(Map<String, dynamic> map) {
-    return Product(
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
       id: map['id'],
       seller_id: map['seller_id'],
       name: map['name'],
@@ -114,28 +114,28 @@ class Product {
       discount: map['discount']?.toInt(),
       original_price: map['original_price']?.toInt(),
       replacement_coupon: map['replacement_coupon'],
-      coupon: map['coupon'] != null ? Coupon.fromMap(map['coupon']) : null,
-      promotion: map['promotion'] != null ? Promotion.fromMap(map['promotion']) : null,
+      coupon: map['coupon'] != null ? CouponModel.fromMap(map['coupon']) : null,
+      promotion: map['promotion'] != null ? PromotionModel.fromMap(map['promotion']) : null,
       amount: map['amount']?.toInt(),
-      history: map['history'] != null ? List<History>.from(map['history']?.map((x) => History.fromMap(x))) : null,
+      history: map['history'] != null ? List<HistoryModel>.from(map['history']?.map((x) => HistoryModel.fromMap(x))) : null,
       active: map['active'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(String source) => Product.fromMap(json.decode(source));
+  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Product(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, status: $status, price: $price, discount: $discount, original_price: $original_price, replacement_coupon: $replacement_coupon, coupon: $coupon, promotion: $promotion, amount: $amount, history: $history, active: $active)';
+    return 'ProductModel(id: $id, seller_id: $seller_id, name: $name, quantity: $quantity, sku: $sku, image: $image, status: $status, price: $price, discount: $discount, original_price: $original_price, replacement_coupon: $replacement_coupon, coupon: $coupon, promotion: $promotion, amount: $amount, history: $history, active: $active)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Product &&
+    return other is ProductModel &&
       other.id == id &&
       other.seller_id == seller_id &&
       other.name == name &&

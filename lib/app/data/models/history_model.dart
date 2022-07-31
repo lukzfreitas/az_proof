@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:az_proof/app/data/models/address.dart';
+import 'package:az_proof/app/data/models/address_model.dart';
 
-class History {
-  Address? address;
+class HistoryModel {
+  AddressModel? address;
   String? status;
   String? type;
   String? track_id;
   String? track_url;
   int? amount;
   String? delivery_forecast;
-  History({
+  HistoryModel({
     this.address,
     this.status,
     this.type,
@@ -21,8 +21,8 @@ class History {
   });
   
 
-  History copyWith({
-    Address? address,
+  HistoryModel copyWith({
+    AddressModel? address,
     String? status,
     String? type,
     String? track_id,
@@ -30,7 +30,7 @@ class History {
     int? amount,
     String? delivery_forecast,
   }) {
-    return History(
+    return HistoryModel(
       address: address ?? this.address,
       status: status ?? this.status,
       type: type ?? this.type,
@@ -53,9 +53,9 @@ class History {
     };
   }
 
-  factory History.fromMap(Map<String, dynamic> map) {
-    return History(
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+  factory HistoryModel.fromMap(Map<String, dynamic> map) {
+    return HistoryModel(
+      address: map['address'] != null ? AddressModel.fromMap(map['address']) : null,
       status: map['status'],
       type: map['type'],
       track_id: map['track_id'],
@@ -67,18 +67,18 @@ class History {
 
   String toJson() => json.encode(toMap());
 
-  factory History.fromJson(String source) => History.fromMap(json.decode(source));
+  factory HistoryModel.fromJson(String source) => HistoryModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'History(address: $address, status: $status, type: $type, track_id: $track_id, track_url: $track_url, amount: $amount, delivery_forecast: $delivery_forecast)';
+    return 'HistoryModel(address: $address, status: $status, type: $type, track_id: $track_id, track_url: $track_url, amount: $amount, delivery_forecast: $delivery_forecast)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is History &&
+    return other is HistoryModel &&
       other.address == address &&
       other.status == status &&
       other.type == type &&

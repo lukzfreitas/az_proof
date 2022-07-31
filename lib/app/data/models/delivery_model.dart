@@ -2,18 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:az_proof/app/data/models/address.dart';
+import 'package:az_proof/app/data/models/address_model.dart';
 
-class Delivery {
-  List<Address>? history;
-  Address? address;
+class DeliveryModel {
+  List<AddressModel>? history;
+  AddressModel? address;
   String? status;
   String? type;
   String track_id;
   String? track_url;
   int? amount;
-  String? delivery_forecast;
-  Delivery({
+  String? DeliveryModel_forecast;
+  DeliveryModel({
     this.history,
     this.address,
     this.status,
@@ -21,21 +21,21 @@ class Delivery {
     required this.track_id,
     this.track_url,
     this.amount,
-    this.delivery_forecast,
+    this.DeliveryModel_forecast,
   });
   
 
-  Delivery copyWith({
-    List<Address>? history,
-    Address? address,
+  DeliveryModel copyWith({
+    List<AddressModel>? history,
+    AddressModel? address,
     String? status,
     String? type,
     String? track_id,
     String? track_url,
     int? amount,
-    String? delivery_forecast,
+    String? DeliveryModel_forecast,
   }) {
-    return Delivery(
+    return DeliveryModel(
       history: history ?? this.history,
       address: address ?? this.address,
       status: status ?? this.status,
@@ -43,7 +43,7 @@ class Delivery {
       track_id: track_id ?? this.track_id,
       track_url: track_url ?? this.track_url,
       amount: amount ?? this.amount,
-      delivery_forecast: delivery_forecast ?? this.delivery_forecast,
+      DeliveryModel_forecast: DeliveryModel_forecast ?? this.DeliveryModel_forecast,
     );
   }
 
@@ -56,37 +56,37 @@ class Delivery {
       'track_id': track_id,
       'track_url': track_url,
       'amount': amount,
-      'delivery_forecast': delivery_forecast,
+      'DeliveryModel_forecast': DeliveryModel_forecast,
     };
   }
 
-  factory Delivery.fromMap(Map<String, dynamic> map) {
-    return Delivery(
-      history: map['history'] != null ? List<Address>.from(map['history']?.map((x) => Address.fromMap(x))) : null,
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+  factory DeliveryModel.fromMap(Map<String, dynamic> map) {
+    return DeliveryModel(
+      history: map['history'] != null ? List<AddressModel>.from(map['history']?.map((x) => AddressModel.fromMap(x))) : null,
+      address: map['address'] != null ? AddressModel.fromMap(map['address']) : null,
       status: map['status'],
       type: map['type'],
       track_id: map['track_id'] ?? '',
       track_url: map['track_url'],
       amount: map['amount']?.toInt(),
-      delivery_forecast: map['delivery_forecast'],
+      DeliveryModel_forecast: map['DeliveryModel_forecast'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Delivery.fromJson(String source) => Delivery.fromMap(json.decode(source));
+  factory DeliveryModel.fromJson(String source) => DeliveryModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Delivery(history: $history, address: $address, status: $status, type: $type, track_id: $track_id, track_url: $track_url, amount: $amount, delivery_forecast: $delivery_forecast)';
+    return 'DeliveryModel(history: $history, address: $address, status: $status, type: $type, track_id: $track_id, track_url: $track_url, amount: $amount, DeliveryModel_forecast: $DeliveryModel_forecast)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Delivery &&
+    return other is DeliveryModel &&
       listEquals(other.history, history) &&
       other.address == address &&
       other.status == status &&
@@ -94,7 +94,7 @@ class Delivery {
       other.track_id == track_id &&
       other.track_url == track_url &&
       other.amount == amount &&
-      other.delivery_forecast == delivery_forecast;
+      other.DeliveryModel_forecast == DeliveryModel_forecast;
   }
 
   @override
@@ -106,6 +106,6 @@ class Delivery {
       track_id.hashCode ^
       track_url.hashCode ^
       amount.hashCode ^
-      delivery_forecast.hashCode;
+      DeliveryModel_forecast.hashCode;
   }
 }

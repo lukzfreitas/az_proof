@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class Seller {
+class SellerModel {
   String id;
   String name;
   String email;
-  Seller({
+  SellerModel({
     required this.id,
     required this.name,
     required this.email,
   });
 
-  Seller copyWith({
+  SellerModel copyWith({
     String? id,
     String? name,
     String? email,
   }) {
-    return Seller(
+    return SellerModel(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
@@ -30,8 +30,8 @@ class Seller {
     };
   }
 
-  factory Seller.fromMap(Map<String, dynamic> map) {
-    return Seller(
+  factory SellerModel.fromMap(Map<String, dynamic> map) {
+    return SellerModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
@@ -40,16 +40,16 @@ class Seller {
 
   String toJson() => json.encode(toMap());
 
-  factory Seller.fromJson(String source) => Seller.fromMap(json.decode(source));
+  factory SellerModel.fromJson(String source) => SellerModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Seller(id: $id, name: $name, email: $email)';
+  String toString() => 'SellerModel(id: $id, name: $name, email: $email)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Seller &&
+    return other is SellerModel &&
       other.id == id &&
       other.name == name &&
       other.email == email;

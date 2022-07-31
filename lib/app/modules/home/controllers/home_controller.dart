@@ -1,5 +1,5 @@
-import 'package:az_proof/app/data/models/order.dart';
-import 'package:az_proof/app/data/models/response_dashboard.dart';
+import 'package:az_proof/app/data/models/order_model.dart';
+import 'package:az_proof/app/data/models/response_dashboard_model.dart';
 import 'package:az_proof/app/data/preferences/user_preferences.dart';
 import 'package:az_proof/app/data/providers/dashboard_provider.dart';
 import 'package:az_proof/app/widgets/pagination/pagination.dart';
@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final user = UserPreferences().obs;
   final userName = ''.obs;
-  final orders = <Order>[].obs;
+  final orders = <OrderModel>[].obs;
   final averageTicket = 0.0.obs;
   final ordersTotal = 0.0.obs;
   final ordersCount = 0.obs;
@@ -22,7 +22,7 @@ class HomeController extends GetxController {
 
   void getDashboard() async {
     DashboardProvider dashboardProvider = DashboardProvider();
-    ResponseDashboard? response = await dashboardProvider.getDashboard();
+    ResponseDashboardModel? response = await dashboardProvider.getDashboard();
     if (response != null) {
       averageTicket.value = response.average_ticket!;
       ordersTotal.value = response.orders_total!;
@@ -36,8 +36,8 @@ class HomeController extends GetxController {
     }
   }
 
-  _createListOrders(List<Order> orders) {
-    List<Order> ordersAux = [];
+  _createListOrders(List<OrderModel> orders) {
+    List<OrderModel> ordersAux = [];
     orders.asMap().entries.forEach((element) {
       if (element.key < rowPerPage.value) {
         ordersAux.add(element.value);

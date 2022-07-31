@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-class Coupon {
+class CouponModel {
   String id;
   String code;
   String name;
   int discount;
   String type;
-  Coupon({
+  CouponModel({
     required this.id,
     required this.code,
     required this.name,
@@ -14,14 +14,14 @@ class Coupon {
     required this.type,
   });
 
-  Coupon copyWith({
+  CouponModel copyWith({
     String? id,
     String? code,
     String? name,
     int? discount,
     String? type,
   }) {
-    return Coupon(
+    return CouponModel(
       id: id ?? this.id,
       code: code ?? this.code,
       name: name ?? this.name,
@@ -40,8 +40,8 @@ class Coupon {
     };
   }
 
-  factory Coupon.fromMap(Map<String, dynamic> map) {
-    return Coupon(
+  factory CouponModel.fromMap(Map<String, dynamic> map) {
+    return CouponModel(
       id: map['id'] ?? '',
       code: map['code'] ?? '',
       name: map['name'] ?? '',
@@ -52,18 +52,18 @@ class Coupon {
 
   String toJson() => json.encode(toMap());
 
-  factory Coupon.fromJson(String source) => Coupon.fromMap(json.decode(source));
+  factory CouponModel.fromJson(String source) => CouponModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Coupon(id: $id, code: $code, name: $name, discount: $discount, type: $type)';
+    return 'CouponModel(id: $id, code: $code, name: $name, discount: $discount, type: $type)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is Coupon &&
+    return other is CouponModel &&
       other.id == id &&
       other.code == code &&
       other.name == name &&
