@@ -20,43 +20,6 @@ class HomeController extends GetxController {
   final rowPerPage = 6.obs;
   final totalRows = 0.obs;
 
-  void getDashboard() async {
-    DashboardProvider dashboardProvider = DashboardProvider();
-    ResponseDashboardModel? response = await dashboardProvider.getDashboard();
-    if (response != null) {
-      averageTicket.value = response.average_ticket!;
-      ordersTotal.value = response.orders_total!;
-      ordersCount.value = response.orders_count!;
-      salesTotal.value = response.sales_total!;
-      salesCount.value = response.sales_count!;
-      totalRows.value = response.total!;
-      totalPages.value = totalRows.value ~/ rowPerPage.value;
-      orders.value = _createListOrders(response.orders!);
-      pagesItem.value = _createListPageItem();
-    }
-  }
-
-  _createListOrders(List<OrderModel> orders) {
-    List<OrderModel> ordersAux = [];
-    orders.asMap().entries.forEach((element) {
-      if (element.key < rowPerPage.value) {
-        ordersAux.add(element.value);
-      }
-    });
-    return ordersAux;
-  }
-
-  _createListPageItem() {
-    int pageCount = 1;
-    List<Item> items = [];
-    while (pageCount <= totalPages.value) {
-      items
-          .add(Item(value: pageCount, actived: pageCount == pageCurrent.value));
-      pageCount++;
-    }
-    return items;
-  }
-
   @override
   void onInit() async {
     await getName();
@@ -74,5 +37,69 @@ class HomeController extends GetxController {
 
   Future<void> getName() async {
     userName.value = await user.value.getName();
+  }
+
+  void getDashboard() async {
+    DashboardProvider dashboardProvider = DashboardProvider();
+    ResponseDashboardModel? response = await dashboardProvider.getDashboard();
+    if (response != null) {
+      averageTicket.value = response.average_ticket!;
+      ordersTotal.value = response.orders_total!;
+      ordersCount.value = response.orders_count!;
+      salesTotal.value = response.sales_total!;
+      salesCount.value = response.sales_count!;
+      totalRows.value = response.total!;
+      totalPages.value = totalRows.value ~/ rowPerPage.value;
+      orders.value = _createListOrders(response.orders!);
+      pagesItem.value = _createListPageItem();
+    }
+  }
+
+  List<OrderModel> _createListOrders(List<OrderModel> orders) {
+    List<OrderModel> ordersAux = [];
+    orders.asMap().entries.forEach((element) {
+      if (element.key < rowPerPage.value) {
+        ordersAux.add(element.value);
+      }
+    });
+    return ordersAux;
+  }
+
+  List<Item> _createListPageItem() {
+    int pageCount = 1;
+    List<Item> items = [];
+    while (pageCount <= totalPages.value) {
+      items
+          .add(Item(value: pageCount, actived: pageCount == pageCurrent.value));
+      pageCount++;
+    }
+    return items;
+  }
+
+  void changePage(int page) {
+    pageCurrent.value = page;
+    pagesItem.value = _createListPageItem();
+  }
+
+  void nextPage() {
+    if (pageCurrent.value == totalPages.value) return;
+    pageCurrent.value = pageCurrent.value + 1;
+    pagesItem.value = _createListPageItem();
+  }
+
+  void prevPage() {
+    if (pageCurrent.value == 1) return;
+    pageCurrent.value = pageCurrent.value - 1;
+    pagesItem.value = _createListPageItem();
+  }
+
+  void goToLastPage() {
+    pageCurrent.value = totalPages.value;
+    pagesItem.value = _createListPageItem();
+  }
+
+  void goToFirstPage() {
+    pageCurrent.value = 1;
+    pagesItem.value = _createListPageItem();
   }
 }

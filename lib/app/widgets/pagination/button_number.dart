@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 class NumberButton extends StatelessWidget {
-  
   final int number;
   final bool actived;
+  final Function onClick;
 
-  const NumberButton({Key? key, required this.number, this.actived = false}) : super(key: key);
+  const NumberButton({
+    Key? key,
+    required this.number,
+    this.actived = false,
+    required this.onClick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {},
+      onTap: () => onClick(),
       child: CircleAvatar(
         backgroundColor: actived ? Color(0xffFE7C6E) : Colors.transparent,
         child: Text(
