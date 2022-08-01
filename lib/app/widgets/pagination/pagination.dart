@@ -74,38 +74,65 @@ class Pagination extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 48.0,
-      decoration: BoxDecoration(
-        color: Color(0xffF5F5F5),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(8.0),
-          bottomRight: Radius.circular(8.0),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Obx(() => Row(children: _getItens(controller.pagesItem))),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: LabelPagination(text: 'Linhas por página'),
+    return LayoutBuilder(
+      builder: ((context, constraints) => Container(
+            height: constraints.maxWidth > 800 ? 48.0 : 450,
+            decoration: BoxDecoration(
+              color: Color(0xffF5F5F5),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(8.0),
+                bottomRight: Radius.circular(8.0),
               ),
-              Obx(
-                () => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: DropdownPagination(
-                    items: _getRowsPerPage(),
-                    value: controller.rowsPerPage.value,
+            ),
+            child: constraints.maxWidth < 800
+                ? ListView(
+                    scrollDirection: Axis.vertical,                    
+                    children: [
+                      Obx(() => Column(children: _getItens(controller.pagesItem))),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: LabelPagination(text: 'Linhas por página'),
+                          ),
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: DropdownPagination(
+                                items: _getRowsPerPage(),
+                                value: controller.rowsPerPage.value,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Obx(() => Row(children: _getItens(controller.pagesItem))),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: LabelPagination(text: 'Linhas por página'),
+                          ),
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: DropdownPagination(
+                                items: _getRowsPerPage(),
+                                value: controller.rowsPerPage.value,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
+          )),
     );
+    // return  ;
   }
 }

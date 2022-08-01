@@ -18,7 +18,7 @@ class DashboardView extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TitleDashboard(
-                text: "Resumo da atividade" + constraints.maxWidth.toString()),
+                text: "Resumo da atividade"),
             Obx(
               () => constraints.maxWidth > 1100
                   ? Row(
