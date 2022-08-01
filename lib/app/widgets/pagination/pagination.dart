@@ -1,5 +1,5 @@
 import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
-import 'package:az_proof/app/widgets/icon_svg.dart';
+import 'package:az_proof/app/utils/icon_svg.dart';
 import 'package:az_proof/app/widgets/pagination/button_arrow.dart';
 import 'package:az_proof/app/widgets/pagination/button_number.dart';
 import 'package:az_proof/app/widgets/pagination/dropdown_pagination.dart';

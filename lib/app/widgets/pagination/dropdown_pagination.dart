@@ -1,5 +1,5 @@
 import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
-import 'package:az_proof/app/widgets/icon_svg.dart';
+import 'package:az_proof/app/utils/icon_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

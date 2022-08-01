@@ -1,5 +1,5 @@
-import 'package:az_proof/app/widgets/subtitle_card.dart';
-import 'package:az_proof/app/widgets/title_card.dart';
+import 'package:az_proof/app/widgets/typograph/subtitle_card.dart';
+import 'package:az_proof/app/widgets/typograph/title_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

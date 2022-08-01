@@ -1,4 +1,4 @@
-import 'package:az_proof/app/widgets/dashboard_view.dart';
+import 'package:az_proof/app/widgets/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_svg/svg.dart';
@@ -95,7 +95,7 @@ class HomeView extends GetView<HomeController> {
                                 vertical: 25,
                                 horizontal: 40,
                               ),
-                              child: DashboardView()
+                              child: Dashboard()
                             ),
                             Container(
                               color: Color(0xffF5F5F5),

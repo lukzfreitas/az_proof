@@ -1,14 +1,15 @@
 import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
 import 'package:az_proof/app/utils/currency.dart';
-import 'package:az_proof/app/widgets/card_dashboard.dart';
-import 'package:az_proof/app/widgets/icon_svg.dart';
+import 'package:az_proof/app/widgets/dashboard/card_dashboard.dart';
+import 'package:az_proof/app/utils/icon_svg.dart';
 import 'package:az_proof/app/widgets/pagination/pagination.dart';
 import 'package:az_proof/app/widgets/table/table_dashboard.dart';
-import 'package:az_proof/app/widgets/title_dashboard.dart';
+import 'package:az_proof/app/widgets/typograph/title_dashboard.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DashboardView extends GetView<HomeController> {
+class Dashboard extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
