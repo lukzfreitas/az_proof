@@ -15,47 +15,57 @@ class Item {
 }
 
 class Pagination extends GetView<HomeController> {
-  
-  final List<String> pagesPerRow;
-  
+  final List<int> pagesPerRow;
 
   const Pagination({
-    Key? key,    
-    required this.pagesPerRow,    
+    Key? key,
+    required this.pagesPerRow,
   }) : super(key: key);
 
   List<Widget> _getItens(List<Item> items) {
     List<Widget> list = [
-      ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_LEFT), onClick: () => controller.goToFirstPage()),
-      ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_LEFT), onClick: () => controller.prevPage()),
+      ButtonArrow(
+          icon: LoadIconSvg(IconsSvg.CHEVRONS_LEFT),
+          onClick: () => controller.goToFirstPage()),
+      ButtonArrow(
+          icon: LoadIconSvg(IconsSvg.ARROW_LEFT),
+          onClick: () => controller.prevPage()),
     ];
-    
+
     items.forEach(
       (Item e) => list.add(
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: NumberButton(number: e.value, actived: e.actived, onClick: () => controller.changePage(e.value)),
+          child: NumberButton(
+              number: e.value,
+              actived: e.actived,
+              onClick: () => controller.changePage(e.value)),
         ),
       ),
     );
 
     list.addAll([
-      ButtonArrow(icon: LoadIconSvg(IconsSvg.ARROW_RIGHT), onClick: () => controller.nextPage()),
-      ButtonArrow(icon: LoadIconSvg(IconsSvg.CHEVRONS_RIGHT), onClick: () => controller.goToLastPage()),
+      ButtonArrow(
+          icon: LoadIconSvg(IconsSvg.ARROW_RIGHT),
+          onClick: () => controller.nextPage()),
+      ButtonArrow(
+          icon: LoadIconSvg(IconsSvg.CHEVRONS_RIGHT),
+          onClick: () => controller.goToLastPage()),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Obx(() =>
-            LabelPagination(text: '${controller.pageCurrent} de ${controller.totalPages} páginas')),
+        child: Obx(() => LabelPagination(
+            text:
+                '${controller.pageCurrent} de ${controller.totalPages} páginas')),
       ),
     ]);
     return list;
   }
 
-  _getPagesPorRow() {
+  _getRowsPerPage() {
     return pagesPerRow
         .map(
-          (String map) => DropdownMenuItem(
-            child: Text(map),
+          (int map) => DropdownMenuItem(
+            child: Text(map.toString()),
             value: map,
           ),
         )
@@ -83,10 +93,15 @@ class Pagination extends GetView<HomeController> {
                 padding: const EdgeInsets.all(8.0),
                 child: LabelPagination(text: 'Linhas por página'),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownPagination(items: _getPagesPorRow()),
-              )
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownPagination(
+                    items: _getRowsPerPage(),
+                    value: controller.rowsPerPage.value,
+                  ),
+                ),
+              ),
             ],
           )
         ],

@@ -9,6 +9,8 @@ class HomeController extends GetxController {
   final user = UserPreferences().obs;
   final userName = ''.obs;
   final orders = <OrderModel>[].obs;
+  final allOrders = <OrderModel>[].obs;
+  final hashMapOrder = Map().obs;
   final averageTicket = 0.0.obs;
   final ordersTotal = 0.0.obs;
   final ordersCount = 0.obs;
@@ -17,8 +19,9 @@ class HomeController extends GetxController {
   final totalPages = 1.obs;
   final pagesItem = <Item>[].obs;
   final pageCurrent = 1.obs;
-  final rowPerPage = 6.obs;
+  final rowsPerPage = 6.obs;
   final totalRows = 0.obs;
+  final lastPage = 0.obs;
 
   @override
   void onInit() async {
@@ -49,26 +52,103 @@ class HomeController extends GetxController {
       salesTotal.value = response.sales_total!;
       salesCount.value = response.sales_count!;
       totalRows.value = response.total!;
-      totalPages.value = totalRows.value ~/ rowPerPage.value;
-      orders.value = _createListOrders(response.orders!);
+      allOrders.value = response.orders!;
+      lastPage.value = _lastPage();
+      orders.value = _createListOrders();
       pagesItem.value = _createListPageItem();
     }
   }
 
-  List<OrderModel> _createListOrders(List<OrderModel> orders) {
-    List<OrderModel> ordersAux = [];
-    orders.asMap().entries.forEach((element) {
-      if (element.key < rowPerPage.value) {
-        ordersAux.add(element.value);
+  void changePage(int page) {
+    pageCurrent.value = page;
+    pagesItem.value = _changeStatePageItem(pageCurrent.value - 1);
+    List<OrderModel> list = hashMapOrder[page - 1];
+    orders.value = list;
+  }
+
+  void nextPage() {
+    if (pageCurrent.value == lastPage.value) return;
+    pageCurrent.value = pageCurrent.value + 1;
+    orders.value = hashMapOrder[pageCurrent.value - 1];
+    pagesItem.value = _changeStatePageItem(pageCurrent.value - 1);
+  }
+
+  void prevPage() {
+    if (pageCurrent.value == 1) return;
+    pageCurrent.value = pageCurrent.value - 1;
+    orders.value = hashMapOrder[pageCurrent.value - 1];
+    pagesItem.value = _changeStatePageItem(pageCurrent.value - 1);
+  }
+
+  void goToLastPage() {
+    pageCurrent.value = lastPage.value;
+    orders.value = hashMapOrder[pageCurrent.value - 1];
+    pagesItem.value = _changeStatePageItem(pageCurrent.value - 1);
+  }
+
+  void goToFirstPage() {
+    pageCurrent.value = 1;
+    orders.value = hashMapOrder[pageCurrent.value - 1];
+    pagesItem.value = _changeStatePageItem(pageCurrent.value - 1);
+  }
+
+  void changeRowsPerPage(int rows) {
+    rowsPerPage.value = rows;
+    orders.value = _changeRows();
+    pagesItem.value = _createListPageItem();
+  }
+
+  List<OrderModel> _changeRows() {
+    int page = 0;
+    int start = 0;
+    int size = 0;
+    Map<int, List<OrderModel>> hashMap = Map();
+    lastPage.value = _lastPage();    
+    while (page < lastPage.value) {
+      start = page * rowsPerPage.value;
+      size = start + rowsPerPage.value;
+      if (size > allOrders.length) {
+        size = allOrders.length;
+        pageCurrent.value = 1;
       }
+      hashMap[page] = allOrders.getRange(start, size).toList();
+      page++;
+    }
+    hashMapOrder.value = hashMap;
+    totalPages.value = hashMapOrder.length;
+    return hashMapOrder[pageCurrent.value - 1];
+  }
+
+  List<OrderModel> _createListOrders() {
+    int page = 0;
+    int start = 0;
+    int size = 0;
+    Map<int, List<OrderModel>> hashMap = Map();
+    while (page < lastPage.value - 1) {
+      start = page * rowsPerPage.value;
+      size = start + rowsPerPage.value;
+      hashMap[page] = allOrders.getRange(start, size).toList();
+      page++;
+    }
+    hashMap[page] = allOrders.getRange(size, totalRows.value).toList();
+    hashMapOrder.value = hashMap;
+    totalPages.value = hashMapOrder.length;
+    return hashMapOrder[pageCurrent.value - 1];
+  }
+
+  List<Item> _changeStatePageItem(int index) {
+    List<Item> items = [];
+    pagesItem.asMap().forEach((key, value) {
+      value.actived = (index == key);
+      items.add(value);
     });
-    return ordersAux;
+    return items;
   }
 
   List<Item> _createListPageItem() {
     int pageCount = 1;
     List<Item> items = [];
-    while (pageCount <= totalPages.value) {
+    while (pageCount <= lastPage.value) {
       items
           .add(Item(value: pageCount, actived: pageCount == pageCurrent.value));
       pageCount++;
@@ -76,30 +156,14 @@ class HomeController extends GetxController {
     return items;
   }
 
-  void changePage(int page) {
-    pageCurrent.value = page;
-    pagesItem.value = _createListPageItem();
-  }
-
-  void nextPage() {
-    if (pageCurrent.value == totalPages.value) return;
-    pageCurrent.value = pageCurrent.value + 1;
-    pagesItem.value = _createListPageItem();
-  }
-
-  void prevPage() {
-    if (pageCurrent.value == 1) return;
-    pageCurrent.value = pageCurrent.value - 1;
-    pagesItem.value = _createListPageItem();
-  }
-
-  void goToLastPage() {
-    pageCurrent.value = totalPages.value;
-    pagesItem.value = _createListPageItem();
-  }
-
-  void goToFirstPage() {
-    pageCurrent.value = 1;
-    pagesItem.value = _createListPageItem();
+  int _lastPage() {
+    int last = (totalRows.value ~/ rowsPerPage.value);
+    if (last == 0) {
+      return 1;
+    }
+    if (totalRows.value % rowsPerPage.value > 0) {
+      return last + 1;
+    }    
+    return last;
   }
 }

@@ -44,7 +44,7 @@ class DashboardView extends GetView<HomeController> {
         TitleDashboard(text: "Pedidos"),
         TableDashboard(),
         Pagination(          
-          pagesPerRow: ["05", "06", "07", "08", "09", "10", "15", "20"],
+          pagesPerRow: [05, 06, 07, 08, 09, 10, 15, 20],
         ),
       ],
     );

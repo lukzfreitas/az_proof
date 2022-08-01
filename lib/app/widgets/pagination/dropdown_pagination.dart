@@ -1,13 +1,17 @@
+import 'package:az_proof/app/modules/home/controllers/home_controller.dart';
 import 'package:az_proof/app/widgets/icon_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class DropdownPagination extends StatelessWidget {
-  final List<DropdownMenuItem<String>> items;
+class DropdownPagination extends GetView<HomeController> {
+  final List<DropdownMenuItem<int>> items;
+  final int value;
 
-  final String value;
-
-  const DropdownPagination({Key? key, required this.items, this.value = '06'})
-      : super(key: key);
+  const DropdownPagination({
+    Key? key,
+    required this.items,
+    required this.value,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class DropdownPagination extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
           value: value,
           items: items,
-          onChanged: (String? value) {},
+          onChanged: (int? value) => controller.changeRowsPerPage(value!),
           icon: Padding(
             padding: const EdgeInsets.only(left: 32.0),
             child: LoadIconSvg(IconsSvg.ARROW_DOWN),
